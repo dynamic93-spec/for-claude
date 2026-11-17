@@ -29,18 +29,21 @@
 2. 아래 코드 붙여넣고 **배포 → 웹 앱** (액세스: 모든 사용자) 로 배포
 
 ```javascript
+var SHEET_ID = "1c6qFFrqFiepPHrSR4UyimPJ-GnNLFWo-hj8O260eZbM"; // TAP OI 밋업 신청 테이블
+
 function doPost(e) {
   var row = JSON.parse(e.postData.contents);
-  SpreadsheetApp.getActiveSpreadsheet()
-    .getSheetByName("TAP OI 밋업 신청 테이블")
-    .appendRow([
-      new Date(), row.orgType, row.orgName, row.name, row.title,
-      row.phone, row.email, row.interest, row.message,
-    ]);
+  var sheet = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
+  sheet.appendRow([
+    new Date(), row.orgType, row.orgName, row.name, row.title,
+    row.phone, row.email, row.interest, row.message,
+  ]);
   return ContentService.createTextOutput(JSON.stringify({ ok: true }))
     .setMimeType(ContentService.MimeType.JSON);
 }
 ```
+
+> 시트 ID로 직접 열고 첫 번째 탭에 적재하므로, 스크립트가 시트에 바인딩되어 있지 않아도, 탭 이름이 바뀌어도 동작합니다.
 
 3. 배포 URL을 Vercel 환경변수 `OI_MEETUP_WEBHOOK_URL` 에 설정 후 재배포
 
