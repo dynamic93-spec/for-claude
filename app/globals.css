@@ -282,27 +282,130 @@ section {
   margin-top: 46px;
 }
 .stat-card {
+  position: relative;
+  overflow: hidden;
   text-align: center;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 34px 16px 30px;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(124, 92, 255, 0.18), transparent 70%),
+    var(--bg-card);
+  border: 1px solid rgba(124, 92, 255, 0.35);
+  border-radius: 22px;
+  padding: 56px 18px 46px;
+  box-shadow: 0 0 40px rgba(124, 92, 255, 0.12) inset;
+}
+/* 카드 위를 지나가는 스캔 라인 */
+.stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(199, 184, 245, 0.12) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  animation: scan 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+.stat-card:nth-child(2)::before { animation-delay: 0.4s; }
+.stat-card:nth-child(3)::before { animation-delay: 0.8s; }
+.stat-card:nth-child(4)::before { animation-delay: 1.2s; }
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(100%); }
+}
+/* 데이터 갱신 시 퍼지는 펄스 */
+.stat-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(124, 92, 255, 0.8);
+  opacity: 0;
+  animation: pulse-ring 1.4s ease-out;
+  pointer-events: none;
+}
+@keyframes pulse-ring {
+  0% { opacity: 0.9; transform: scale(0.97); }
+  100% { opacity: 0; transform: scale(1.03); }
 }
 .stat-card .num {
-  font-size: clamp(36px, 5vw, 52px);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-size: clamp(54px, 7.5vw, 88px);
   font-weight: 700;
   color: #fff;
   font-family: "Space Grotesk", sans-serif;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 .stat-card .num small {
-  font-size: 0.45em;
+  font-size: 0.32em;
   color: var(--lavender);
-  margin-left: 2px;
+  margin-left: 6px;
 }
 .stat-card .label {
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 14px;
+  font-size: 17px;
+  font-weight: 600;
   color: var(--text-dim);
+  word-break: keep-all;
+}
+@media (max-width: 600px) {
+  .stat-card {
+    padding: 48px 10px 32px;
+  }
+  .stat-card .label {
+    font-size: 13.5px;
+  }
+}
+/* 오도미터 */
+.odo {
+  display: inline-flex;
+  /* 글로우는 잘리지 않도록 바깥 컨테이너에 */
+  filter: drop-shadow(0 0 18px rgba(124, 92, 255, 0.6));
+}
+.odo-col {
+  display: inline-block;
+  height: 1.15em;
+  overflow: hidden;
+}
+.odo-strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.odo-strip span {
+  display: block;
+  height: 1.15em;
+  line-height: 1.15em;
+}
+.live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #ff7d9d;
+  box-shadow: 0 0 0 0 rgba(255, 125, 157, 0.7);
+  animation: live-dot 1.6s infinite;
+  vertical-align: middle;
+}
+@keyframes live-dot {
+  0% { box-shadow: 0 0 0 0 rgba(255, 125, 157, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 125, 157, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 125, 157, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stat-card::before,
+  .stat-pulse,
+  .live-dot {
+    animation: none;
+  }
+  .odo-strip {
+    transition: none;
+  }
 }
 .stat-live {
   position: relative;
@@ -310,8 +413,8 @@ section {
 .stat-live::after {
   content: "LIVE";
   position: absolute;
-  top: 14px;
-  right: 16px;
+  top: 16px;
+  right: 18px;
   font-size: 10px;
   letter-spacing: 0.14em;
   color: #ff7d9d;
@@ -325,9 +428,9 @@ section {
   50% { opacity: 0.45; }
 }
 .stats-updated {
-  margin-top: 18px;
+  margin-top: 20px;
   text-align: right;
-  font-size: 12.5px;
+  font-size: 13.5px;
   color: var(--lavender-soft);
 }
 .legacy-strip {

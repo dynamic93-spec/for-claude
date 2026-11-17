@@ -89,7 +89,7 @@ export default function Home() {
               참가 신청하기 →
             </a>
             <Link className="btn btn-ghost" href="/oi-meetup">
-              TAP OI 밋업 신청
+              TAP 협업 미팅 신청
             </Link>
           </div>
           <p className="hero-deadline">신청 마감 {EVENT.deadline} · 1:1 Meet-up은 추후 별도 안내</p>
@@ -143,23 +143,9 @@ export default function Home() {
       {/* STATS */}
       <section id="stats" className="stats-wrap">
         <div className="container">
-          <div className="section-label">Live Registration</div>
-          <h2 className="section-title">2026 CORI 실시간 신청 현황</h2>
-          <p className="section-desc">
-            아래 수치는 참가신청 접수 시트와 연동되어 자동으로 집계됩니다.
-          </p>
+          <div className="section-label">Registration</div>
+          <h2 className="section-title">2026 CORI 신청 현황</h2>
           <StatsCounter fallback={STATS_FALLBACK} />
-          <div className="legacy-strip">
-            <span>
-              2023–2025 누적 참여 <b>{LEGACY.companies}개사</b>
-            </span>
-            <span>
-              누적 참석 <b>{LEGACY.attendees}명+</b>
-            </span>
-            <span>
-              올해로 <b>{LEGACY.editions + 1}회차</b> 개최
-            </span>
-          </div>
         </div>
       </section>
 
@@ -191,7 +177,6 @@ export default function Home() {
                   <span className="kn-desc en">{k.time}</span>
                 </div>
               ))}
-              <p className="program-note">※ 발표 기관·기업은 계속 추가되고 있습니다.</p>
             </div>
           </div>
         </div>
