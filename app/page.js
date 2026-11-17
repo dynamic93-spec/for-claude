@@ -1,0 +1,329 @@
+import Link from "next/link";
+import {
+  EVENT,
+  LEGACY,
+  KEYNOTES,
+  PARTICIPANTS,
+  PROGRAM,
+  STATS_FALLBACK,
+} from "../lib/event-data";
+import StatsCounter from "./components/StatsCounter";
+import LogoMarquee from "./components/LogoMarquee";
+
+function NetworkLines() {
+  return (
+    <svg
+      className="hero-net"
+      viewBox="0 0 1440 900"
+      fill="none"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+    >
+      <g stroke="rgba(199,184,245,0.25)" strokeWidth="1">
+        <path d="M-50 650 L240 520 L430 700 L720 560 L980 720 L1250 580 L1500 680" />
+        <path d="M100 880 L240 520 M430 700 L520 880 M980 720 L1100 900" />
+        <path d="M1250 580 L1180 420 L1500 300" />
+      </g>
+      <g fill="#c7b8f5">
+        <circle cx="240" cy="520" r="5" opacity="0.9" />
+        <circle cx="430" cy="700" r="4" opacity="0.6" />
+        <circle cx="720" cy="560" r="6" opacity="0.8" />
+        <circle cx="980" cy="720" r="4" opacity="0.6" />
+        <circle cx="1250" cy="580" r="5" opacity="0.85" />
+        <circle cx="1180" cy="420" r="3.5" opacity="0.5" />
+      </g>
+    </svg>
+  );
+}
+
+export default function Home() {
+  return (
+    <>
+      <header className="site-header">
+        <div className="inner">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/tap-logo.png" alt="TAP Angel Partners" className="header-logo" />
+          <nav className="header-nav">
+            <a href="#about">행사 소개</a>
+            <a href="#stats">신청 현황</a>
+            <a href="#keynote">키노트</a>
+            <a href="#partners">참여 기업·기관</a>
+            <a href="#program">프로그램</a>
+            <a className="nav-cta" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
+              참가 신청
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section className="hero" style={{ padding: 0 }}>
+        <div className="hero-bg" />
+        <NetworkLines />
+        <div className="container">
+          <div className="hero-edition en">
+            <b>{EVENT.edition}</b> OPEN INNOVATION NETWORKING · 2026
+          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/cori-wordmark.png" alt="CORI" className="hero-wordmark" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/cori-tagline.png"
+            alt={EVENT.tagline}
+            className="hero-tagline"
+          />
+          <p className="hero-sub">{EVENT.subtitle}</p>
+          <div className="hero-meta">
+            <span>
+              📅 <b>{EVENT.date}</b> {EVENT.time}
+            </span>
+            <span>
+              📍 <b>{EVENT.venue}</b> ({EVENT.address})
+            </span>
+            <span>
+              👥 <b>공공기관 · 대·중견기업 · 투자사 · 스타트업</b>
+            </span>
+          </div>
+          <div className="hero-actions">
+            <a className="btn btn-primary" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
+              참가 신청하기 →
+            </a>
+            <Link className="btn btn-ghost" href="/oi-meetup">
+              TAP OI 밋업 신청
+            </Link>
+          </div>
+          <p className="hero-deadline">신청 마감 {EVENT.deadline} · 1:1 Meet-up은 추후 별도 안내</p>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about">
+        <div className="container">
+          <div className="section-label">About CORI</div>
+          <h2 className="section-title">
+            공공과 민간의 오픈이노베이션이
+            <br />
+            한자리에서 연결됩니다
+          </h2>
+          <p className="section-desc">
+            CORI(Connect with Our Rising Innovation)는 탭엔젤파트너스가 {LEGACY.editions}개년에 걸쳐
+            주관해 온 공공-민간 통합형 오픈이노베이션 네트워킹입니다. 공공기관은 OI 기반을
+            강화하고, 대·중견기업은 유망 스타트업을 발굴하며, 스타트업은 실질적인 협력
+            파트너를 만나는 — 협력사업 발굴과 혁신 생태계 확산의 장입니다.
+          </p>
+          <div className="about-grid">
+            <div className="about-card">
+              <div className="icon">🏛️</div>
+              <h3>공공기관</h3>
+              <p>
+                공공 오픈이노베이션 사례 공유와 기관 간 교류로 OI 추진 기반을
+                강화합니다.
+              </p>
+            </div>
+            <div className="about-card">
+              <div className="icon">🏢</div>
+              <h3>대·중견기업 · 투자사</h3>
+              <p>
+                유망 스타트업을 한자리에서 만나 PoC, 공동개발, 전략적 투자 등
+                협업 기회를 발굴합니다.
+              </p>
+            </div>
+            <div className="about-card">
+              <div className="icon">🚀</div>
+              <h3>스타트업</h3>
+              <p>
+                수요기업·투자사와의 1:1 밋업으로 실증, 납품, 투자유치 등 스케일업
+                기회를 연결합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section id="stats" className="stats-wrap">
+        <div className="container">
+          <div className="section-label">Live Registration</div>
+          <h2 className="section-title">2026 CORI 실시간 신청 현황</h2>
+          <p className="section-desc">
+            아래 수치는 참가신청 접수 시트와 연동되어 자동으로 집계됩니다.
+          </p>
+          <StatsCounter fallback={STATS_FALLBACK} />
+          <div className="legacy-strip">
+            <span>
+              2023–2025 누적 참여 <b>{LEGACY.companies}개사</b>
+            </span>
+            <span>
+              누적 참석 <b>{LEGACY.attendees}명+</b>
+            </span>
+            <span>
+              올해로 <b>{LEGACY.editions + 1}회차</b> 개최
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* KEYNOTE */}
+      <section id="keynote">
+        <div className="container">
+          <div className="section-label">Keynote Speech</div>
+          <h2 className="section-title">키노트 스피치</h2>
+          <p className="section-desc">
+            공공기관과 대·중견기업이 직접 들려주는 오픈이노베이션 추진 사례.
+          </p>
+          <div className="keynote-cols">
+            <div className="keynote-col">
+              <h3>공공 OI 사례</h3>
+              {KEYNOTES.public.map((k, i) => (
+                <div className="keynote-card" key={k.name}>
+                  <span className="kn-no en">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="kn-name">{k.name}</span>
+                  <span className="kn-desc">{k.desc}</span>
+                </div>
+              ))}
+            </div>
+            <div className="keynote-col">
+              <h3>민간 OI 사례</h3>
+              {KEYNOTES.private.map((k, i) => (
+                <div className="keynote-card" key={k.name}>
+                  <span className="kn-no en">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="kn-name">{k.name}</span>
+                  <span className="kn-desc">{k.desc}</span>
+                </div>
+              ))}
+              <p className="program-note">※ 발표 기관·기업은 계속 추가되고 있습니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERS MARQUEE */}
+      <section id="partners" className="marquee-section" style={{ paddingLeft: 0, paddingRight: 0 }}>
+        <div className="container">
+          <div className="section-label">Participants</div>
+          <h2 className="section-title">함께하는 기업 · 기관</h2>
+          <p className="section-desc">
+            키노트 및 1:1 밋업에 참여하는 공공기관, 대·중견기업, 투자사입니다.
+          </p>
+        </div>
+
+        <div className="marquee-group">
+          <div className="mq-label">
+            <h3>공공기관</h3>
+            <span>{PARTICIPANTS.public.length}개 기관</span>
+          </div>
+          <LogoMarquee items={PARTICIPANTS.public} duration={46} />
+        </div>
+
+        <div className="marquee-group">
+          <div className="mq-label">
+            <h3>대·중견기업</h3>
+            <span>{PARTICIPANTS.private.length}개사 · 1:1 밋업 OI 파트너</span>
+          </div>
+          <LogoMarquee items={PARTICIPANTS.private} reverse duration={52} />
+        </div>
+
+        <div className="marquee-group">
+          <div className="mq-label">
+            <h3>투자사 · CVC</h3>
+            <span>{PARTICIPANTS.investors.length}개사</span>
+          </div>
+          <LogoMarquee items={PARTICIPANTS.investors} duration={40} />
+        </div>
+      </section>
+
+      {/* PROGRAM */}
+      <section id="program" className="stats-wrap">
+        <div className="container">
+          <div className="section-label">Program</div>
+          <h2 className="section-title">프로그램</h2>
+          <div className="program-list">
+            {PROGRAM.map((p) => (
+              <div className="program-item" key={p.no}>
+                <div className="p-no en">{p.no}</div>
+                <div>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="program-note">※ 세부 프로그램은 변경될 수 있습니다.</p>
+        </div>
+      </section>
+
+      {/* OI MEETUP CTA */}
+      <section className="oi-cta">
+        <div className="container oi-cta-box">
+          <div>
+            <div className="section-label">TAP Open Innovation</div>
+            <h2 className="section-title">
+              탭엔젤파트너스와
+              <br />
+              오픈이노베이션을 함께하실 기관을 찾습니다
+            </h2>
+            <p className="section-desc">
+              스타트업 협업 수요가 있는 대·중견기업, 공공기관이라면 행사 참가와 별개로
+              TAP과의 1:1 OI 밋업을 신청하실 수 있습니다. 검토 후 담당자가 개별
+              연락드립니다.
+            </p>
+          </div>
+          <div className="right">
+            <Link className="btn btn-primary" href="/oi-meetup">
+              OI 밋업 신청하기 →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* INFO + APPLY */}
+      <section id="apply">
+        <div className="container">
+          <div className="section-label">Information</div>
+          <h2 className="section-title">행사 안내</h2>
+          <div className="info-grid">
+            <div className="info-card">
+              <h4>DATE</h4>
+              <div className="big">{EVENT.date}</div>
+              <p>{EVENT.time}</p>
+            </div>
+            <div className="info-card">
+              <h4>VENUE</h4>
+              <div className="big">{EVENT.venue}</div>
+              <p>{EVENT.address}</p>
+            </div>
+            <div className="info-card">
+              <h4>HOST</h4>
+              <div className="big">탭엔젤파트너스</div>
+              <p>TAP Angel Partners · {LEGACY.editions + 1}년 연속 주관</p>
+            </div>
+          </div>
+
+          <div className="apply-qr">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/qr-apply.png" alt="참가 신청 QR" />
+            <div className="t">
+              <b>지금 바로 참가 신청하세요</b>
+              <span>
+                QR 스캔 또는 버튼 클릭 · 신청 마감 {EVENT.deadline}
+              </span>
+            </div>
+            <a className="btn btn-primary" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
+              참가 신청 →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div className="inner">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/tap-logo.png" alt="TAP Angel Partners" />
+          <span>
+            © 2026 TAP Angel Partners. CORI — Connect with Our Rising Innovation.
+          </span>
+        </div>
+      </footer>
+    </>
+  );
+}
