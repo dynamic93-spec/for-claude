@@ -25,15 +25,19 @@
 
 ## OI 밋업 신청 → 구글시트 적재
 
-1. 'TAP OI 밋업 신청 테이블' 시트에서 **확장 프로그램 → Apps Script** 열기
-2. 아래 코드 붙여넣고 **배포 → 웹 앱** (액세스: 모든 사용자) 로 배포
+적재 위치: `2026 CORI 운영관리_TAP` 시트의 `04. TAP OI 밋업 신청` 탭
+
+1. 운영관리 시트에서 **확장 프로그램 → Apps Script** 열기
+2. 기존 `Code.gs`(CORI 매칭 메뉴 등)는 **건드리지 말고**, 파일 `+` → 스크립트로 `OiMeetup.gs`를 새로 만들어 아래 코드 붙여넣기
+3. **배포 → 새 배포 → 웹 앱** (실행: 나 / 액세스: 모든 사용자) 로 배포
 
 ```javascript
-var SHEET_ID = "1c6qFFrqFiepPHrSR4UyimPJ-GnNLFWo-hj8O260eZbM"; // TAP OI 밋업 신청 테이블
+var OI_SHEET_ID = "1ZnGwukihba5K9gvhhe97nvxZ0tSI_XHNub1iWSiLPUk"; // 2026 CORI 운영관리_TAP
+var OI_TAB_NAME = "04. TAP OI 밋업 신청";
 
 function doPost(e) {
   var row = JSON.parse(e.postData.contents);
-  var sheet = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
+  var sheet = SpreadsheetApp.openById(OI_SHEET_ID).getSheetByName(OI_TAB_NAME);
   sheet.appendRow([
     new Date(), row.orgType, row.orgName, row.name, row.title,
     row.phone, row.email, row.interest, row.message,
@@ -43,7 +47,8 @@ function doPost(e) {
 }
 ```
 
-> 시트 ID로 직접 열고 첫 번째 탭에 적재하므로, 스크립트가 시트에 바인딩되어 있지 않아도, 탭 이름이 바뀌어도 동작합니다.
+> 시트 ID로 직접 열므로 스크립트가 시트에 바인딩되어 있지 않아도 동작합니다. 탭 이름을 바꾸면 `OI_TAB_NAME`도 같이 바꿔야 합니다.
+> 프로젝트에 `doPost` 함수가 이미 있으면 이름이 겹치므로 먼저 확인하세요.
 
 3. 배포 URL을 Vercel 환경변수 `OI_MEETUP_WEBHOOK_URL` 에 설정 후 재배포
 
