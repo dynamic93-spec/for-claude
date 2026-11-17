@@ -4,7 +4,7 @@ import {
   LEGACY,
   KEYNOTES,
   PARTICIPANTS,
-  PROGRAM,
+  SCHEDULE,
   STATS_FALLBACK,
 } from "../lib/event-data";
 import StatsCounter from "./components/StatsCounter";
@@ -178,7 +178,7 @@ export default function Home() {
                 <div className="keynote-card" key={k.name}>
                   <span className="kn-no en">{String(i + 1).padStart(2, "0")}</span>
                   <span className="kn-name">{k.name}</span>
-                  <span className="kn-desc">{k.desc}</span>
+                  <span className="kn-desc en">{k.time}</span>
                 </div>
               ))}
             </div>
@@ -188,7 +188,7 @@ export default function Home() {
                 <div className="keynote-card" key={k.name}>
                   <span className="kn-no en">{String(i + 1).padStart(2, "0")}</span>
                   <span className="kn-name">{k.name}</span>
-                  <span className="kn-desc">{k.desc}</span>
+                  <span className="kn-desc en">{k.time}</span>
                 </div>
               ))}
               <p className="program-note">※ 발표 기관·기업은 계속 추가되고 있습니다.</p>
@@ -237,13 +237,25 @@ export default function Home() {
         <div className="container">
           <div className="section-label">Program</div>
           <h2 className="section-title">프로그램</h2>
-          <div className="program-list">
-            {PROGRAM.map((p) => (
-              <div className="program-item" key={p.no}>
-                <div className="p-no en">{p.no}</div>
-                <div>
-                  <h3>{p.title}</h3>
-                  <p>{p.desc}</p>
+          <p className="section-desc">{EVENT.date} · {EVENT.venue}</p>
+          <div className="timetable">
+            {SCHEDULE.map((s) => (
+              <div className="tt-row" key={s.time}>
+                <div className="tt-time en">{s.time}</div>
+                <div className="tt-body">
+                  <span className="tt-part">{s.part}</span>
+                  <h3>{s.title}</h3>
+                  {s.desc && <p>{s.desc}</p>}
+                  {s.keynotes && (
+                    <ul className="tt-speakers">
+                      {KEYNOTES[s.keynotes].map((k) => (
+                        <li key={k.name}>
+                          <span className="en">{k.time}</span>
+                          {k.name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
             ))}
@@ -254,13 +266,11 @@ export default function Home() {
 
       {/* OI MEETUP CTA */}
       <section className="oi-cta">
-        <div className="container oi-cta-box">
+        <div className="container oi-cta-box one-line">
           <div>
             <div className="section-label">TAP Open Innovation</div>
-            <h2 className="section-title">
-              탭엔젤파트너스와
-              <br />
-              오픈이노베이션을 함께하실 기관을 찾습니다
+            <h2 className="section-title oi-cta-title">
+              탭엔젤파트너스와 오픈이노베이션을 함께하실 기관을 찾습니다
             </h2>
             <p className="section-desc">
               스타트업 협업 수요가 있는 대·중견기업, 공공기관이라면 행사 참가와 별개로
@@ -268,7 +278,7 @@ export default function Home() {
               연락드립니다.
             </p>
           </div>
-          <div className="right">
+          <div>
             <Link className="btn btn-primary" href="/oi-meetup">
               OI 밋업 신청하기 →
             </Link>

@@ -52,10 +52,26 @@ function doPost(e) {
 
 3. 배포 URL을 Vercel 환경변수 `OI_MEETUP_WEBHOOK_URL` 에 설정 후 재배포
 
-## 참여 기업·기관 명단 / 로고
+## 참여 기업·기관 명단 / 시간표
 
-- 명단 수정: `lib/event-data.js` (`KEYNOTES`, `PARTICIPANTS`)
-- 로고 이미지 노출: `public/logos/` 에 PNG 추가 후 `app/components/LogoMarquee.js` 의 `LOGO_FILES` 매핑에 등록 (미등록 시 텍스트 워드마크 칩으로 표시)
+- 키노트·참여기관·시간표: `lib/event-data.js` (`KEYNOTES`, `PARTICIPANTS`, `SCHEDULE`)
+
+## 로고 이미지 넣기
+
+1. **파일 준비**: 투명 배경 PNG(또는 SVG), 높이 80px 이상, 로고 주변 여백 최소화. 어두운 배경이므로 흰색/밝은 버전 로고 권장
+2. **파일명**: 영문 소문자·숫자·하이픈만 사용 (예: `cj-enm.png`, `hd-hyundai-samho.png`)
+3. **업로드**: GitHub 저장소 → `public/logos/` 폴더 → *Add file → Upload files*
+4. **매핑 등록**: `app/components/LogoMarquee.js` 의 `LOGO_FILES` 에 `"기관명": "파일명"` 추가
+   기관명은 `lib/event-data.js` 의 `PARTICIPANTS` 표기와 **완전히 같아야** 함
+
+```javascript
+const LOGO_FILES = {
+  "CJ ENM": "cj-enm.png",
+  "HD현대삼호": "hd-hyundai-samho.png",
+};
+```
+
+5. 커밋하면 Vercel이 자동 재배포 (약 1분). 매핑이 없는 기관은 기존처럼 텍스트로 표시됨
 
 ## 개발
 

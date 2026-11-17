@@ -512,6 +512,75 @@ section {
   font-size: 15px;
   line-height: 1.7;
 }
+.timetable {
+  margin-top: 40px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+.tt-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 24px;
+  padding: 24px 30px;
+  border-top: 1px solid var(--line);
+}
+.tt-row:first-child {
+  border-top: none;
+}
+.tt-time {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--lavender);
+  padding-top: 2px;
+  white-space: nowrap;
+}
+.tt-part {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(124, 92, 255, 0.35);
+  border: 1px solid rgba(124, 92, 255, 0.6);
+  border-radius: 999px;
+  padding: 2px 10px;
+  margin-bottom: 8px;
+}
+.tt-body h3 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.tt-body p {
+  color: var(--text-dim);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.tt-speakers {
+  list-style: none;
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 8px 18px;
+}
+.tt-speakers li {
+  font-size: 14.5px;
+  color: var(--text);
+  display: flex;
+  gap: 10px;
+}
+.tt-speakers li span {
+  color: var(--lavender-soft);
+  min-width: 42px;
+}
+@media (max-width: 700px) {
+  .tt-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px;
+  }
+}
+
 .program-note {
   margin-top: 18px;
   font-size: 13px;
@@ -534,6 +603,19 @@ section {
 }
 .oi-cta-box .right {
   text-align: right;
+}
+.oi-cta-box.one-line {
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+.oi-cta-title {
+  font-size: clamp(20px, 2.6vw, 30px);
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .oi-cta-title {
+    white-space: normal;
+  }
 }
 
 /* ---------- Info / Footer ---------- */
