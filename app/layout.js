@@ -8,7 +8,7 @@ export const metadata = {
     title: "2026 CORI | 공공&민간 연계 오픈이노베이션 네트워킹",
     description:
       "공공기관 · 대·중견기업 · 투자사 · 스타트업이 한자리에. 키노트, 네트워킹, 1:1 비즈니스 밋업.",
-    images: ["/keyvisual.jpg"],
+    images: ["/keyvisual.jpg"], // 공유 미리보기는 글자가 있는 원본 키비주얼 사용
   },
 };
 

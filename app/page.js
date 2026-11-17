@@ -60,6 +60,9 @@ export default function Home() {
       <section className="hero" style={{ padding: 0 }}>
         <div className="hero-bg" />
         <NetworkLines />
+        <div className="hero-vertical en" aria-hidden="true">
+          <span>OPEN INNOVATION</span>
+        </div>
         <div className="container">
           <div className="hero-edition en">
             <b>{EVENT.edition}</b> OPEN INNOVATION NETWORKING · 2026
@@ -183,37 +186,37 @@ export default function Home() {
       </section>
 
       {/* PARTNERS MARQUEE */}
-      <section id="partners" className="marquee-section" style={{ paddingLeft: 0, paddingRight: 0 }}>
+      <section id="partners" className="marquee-section">
         <div className="container">
           <div className="section-label">Participants</div>
           <h2 className="section-title">함께하는 기업 · 기관</h2>
           <p className="section-desc">
             키노트 및 1:1 밋업에 참여하는 공공기관, 대·중견기업, 투자사입니다.
           </p>
-        </div>
 
-        <div className="marquee-group">
-          <div className="mq-label">
-            <h3>공공기관</h3>
-            <span>{PARTICIPANTS.public.length}개 기관</span>
+          <div className="marquee-group">
+            <div className="mq-label">
+              <h3>공공기관</h3>
+              <span>{PARTICIPANTS.public.length}개 기관</span>
+            </div>
+            <LogoMarquee items={PARTICIPANTS.public} />
           </div>
-          <LogoMarquee items={PARTICIPANTS.public} duration={46} />
-        </div>
 
-        <div className="marquee-group">
-          <div className="mq-label">
-            <h3>대·중견기업</h3>
-            <span>{PARTICIPANTS.private.length}개사 · 1:1 밋업 OI 파트너</span>
+          <div className="marquee-group">
+            <div className="mq-label">
+              <h3>대·중견기업</h3>
+              <span>{PARTICIPANTS.private.length}개사 · 1:1 밋업 OI 파트너</span>
+            </div>
+            <LogoMarquee items={PARTICIPANTS.private} reverse />
           </div>
-          <LogoMarquee items={PARTICIPANTS.private} reverse duration={52} />
-        </div>
 
-        <div className="marquee-group">
-          <div className="mq-label">
-            <h3>투자사 · CVC</h3>
-            <span>{PARTICIPANTS.investors.length}개사</span>
+          <div className="marquee-group">
+            <div className="mq-label">
+              <h3>투자사 · CVC</h3>
+              <span>{PARTICIPANTS.investors.length}개사</span>
+            </div>
+            <LogoMarquee items={PARTICIPANTS.investors} />
           </div>
-          <LogoMarquee items={PARTICIPANTS.investors} duration={40} />
         </div>
       </section>
 
