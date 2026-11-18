@@ -103,9 +103,9 @@ export default function StatsCounter({ fallback }) {
         <StatCard value={stats.total} unit="개사" label="전체 신청 기업·기관" active={active} pulseKey={pulseKey} />
         <StatCard value={stats.publicOrgs} unit="개" label="공공기관" active={active} pulseKey={pulseKey} />
         <StatCard
-          value={stats.privateCorps + stats.cvc}
+          value={stats.corporates}
           unit="개사"
-          label="대·중견기업 · CVC"
+          label="대·중견기업 · 투자사"
           active={active}
           pulseKey={pulseKey}
         />
