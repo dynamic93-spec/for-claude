@@ -201,6 +201,7 @@ export default async function Home() {
               ))}
             </div>
           </div>
+          <p className="program-note">※ 발표 기관·기업 및 순서는 사정에 따라 변경될 수 있습니다.</p>
         </div>
       </section>
 
