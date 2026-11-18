@@ -295,7 +295,7 @@ export default async function Home() {
             </Link>
             <span>
               참여사 카드를 눌러도 신청할 수 있습니다.{" "}
-              <span className="nw">신청 후 매칭 결과에 따라 밋업이 성사되지 않을 수 있습니다.</span>
+              신청 후 매칭 결과에 따라 밋업이 성사되지 않을 수 있습니다.
             </span>
           </div>
           <MeetupPartners partners={meetupPartners} />

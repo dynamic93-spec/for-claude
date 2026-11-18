@@ -1518,3 +1518,12 @@ a.mp-card:focus-visible {
   border: 1px dashed var(--line);
   color: var(--text-dim);
 }
+/* 아주 좁은 화면(320px)에서 긴 회사명·태그가 2열 그리드를 밀어내지 않도록 */
+@media (max-width: 600px) {
+  .mp-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mp-name {
+    overflow-wrap: anywhere;
+  }
+}
