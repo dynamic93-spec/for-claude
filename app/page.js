@@ -97,13 +97,18 @@ export default async function Home() {
           <p className="hero-sub">{EVENT.subtitle}</p>
           <div className="hero-meta">
             <span>
-              📅 <b>{EVENT.date}</b> {EVENT.time}
+              📅 <b className="nw">{EVENT.date}</b> <span className="nw">{EVENT.time}</span>
             </span>
             <span>
-              📍 <b>{EVENT.venue}</b> ({EVENT.address})
+              📍 <b className="nw">{EVENT.venue}</b>{" "}
+              <span className="hero-addr nw">({EVENT.address})</span>
             </span>
             <span>
-              👥 <b>공공기관 · 대·중견기업 · 투자사 · 스타트업</b>
+              👥{" "}
+              <b>
+                <span className="nw">공공기관 ·</span> <span className="nw">대·중견기업 ·</span>{" "}
+                <span className="nw">투자사 ·</span> <span className="nw">스타트업</span>
+              </b>
             </span>
           </div>
           <div className="hero-actions">
@@ -114,7 +119,11 @@ export default async function Home() {
               TAP 협업 미팅 신청
             </Link>
           </div>
-          <p className="hero-deadline">신청 마감 {EVENT.deadline} · 1:1 Meet-up은 추후 별도 안내</p>
+          <p className="hero-deadline">
+            <span className="nw">신청 마감 {EVENT.deadline}</span>
+            <span className="sep"> · </span>
+            <span className="nw">1:1 Meet-up은 추후 별도 안내</span>
+          </p>
         </div>
       </section>
 
@@ -122,10 +131,10 @@ export default async function Home() {
       <section id="about">
         <div className="container">
           <div className="section-label">About CORI</div>
-          <h2 className="section-title">
-            공공과 민간의 오픈이노베이션이
+          <h2 className="section-title about-title">
+            <span className="nw">공공과 민간의 오픈이노베이션이</span>
             <br />
-            한자리에서 연결됩니다
+            <span className="nw">한자리에서 연결됩니다</span>
           </h2>
           <p className="section-desc">
             CORI(Connect with Our Rising Innovation)는 탭엔젤파트너스가 주관하는 공공-민간
@@ -191,8 +200,19 @@ export default async function Home() {
                       <img src={k.logo} alt={`${k.name} 로고`} loading="lazy" />
                     )}
                   </span>
-                  <span className="kn-name">{k.name}</span>
-                  <span className="kn-desc en">{k.time}</span>
+                  <span className="kn-body">
+                    <span className="kn-name">
+                      {k.parts
+                        ? k.parts.map((part, j) => (
+                            <span key={part}>
+                              {j > 0 && <wbr />}
+                              {part}
+                            </span>
+                          ))
+                        : k.name}
+                    </span>
+                    <span className="kn-desc en">{k.time}</span>
+                  </span>
                 </div>
               ))}
             </div>
@@ -207,8 +227,19 @@ export default async function Home() {
                       <img src={k.logo} alt={`${k.name} 로고`} loading="lazy" />
                     )}
                   </span>
-                  <span className="kn-name">{k.name}</span>
-                  <span className="kn-desc en">{k.time}</span>
+                  <span className="kn-body">
+                    <span className="kn-name">
+                      {k.parts
+                        ? k.parts.map((part, j) => (
+                            <span key={part}>
+                              {j > 0 && <wbr />}
+                              {part}
+                            </span>
+                          ))
+                        : k.name}
+                    </span>
+                    <span className="kn-desc en">{k.time}</span>
+                  </span>
                 </div>
               ))}
             </div>
@@ -223,7 +254,7 @@ export default async function Home() {
           <div className="section-label">Participants</div>
           <h2 className="section-title">함께하는 기업 · 기관</h2>
           <p className="section-desc">
-            키노트 및 1:1 밋업에 참여하는 공공기관, 대·중견기업, 투자사입니다.
+            키노트 및 1:1 밋업에 참여하는 공공기관, <span className="nw">대·중견기업</span>, 투자사입니다.
           </p>
 
           <div className="marquee-group">
@@ -257,7 +288,9 @@ export default async function Home() {
         <div className="container">
           <div className="section-label">Program</div>
           <h2 className="section-title">프로그램</h2>
-          <p className="section-desc">{EVENT.date} · {EVENT.venue}</p>
+          <p className="section-desc">
+            <span className="nw">{EVENT.date}</span> · <span className="nw">{EVENT.venue}</span>
+          </p>
           <div className="timetable">
             {SCHEDULE.map((s) => (
               <div className="tt-row" key={s.time}>
@@ -335,7 +368,8 @@ export default async function Home() {
             <div className="t">
               <b>지금 바로 참가 신청하세요</b>
               <span>
-                QR 스캔 또는 버튼 클릭 · 신청 마감 {EVENT.deadline}
+                <span className="nw">QR 스캔 또는 버튼 클릭</span> ·{" "}
+                <span className="nw">신청 마감 {EVENT.deadline}</span>
               </span>
             </div>
             <a className="btn btn-primary" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
