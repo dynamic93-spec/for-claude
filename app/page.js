@@ -120,8 +120,6 @@ export default async function Home() {
             </Link>
           </div>
           <p className="hero-deadline">
-            <span className="nw">신청 마감 {EVENT.deadline}</span>
-            <span className="sep"> · </span>
             <span className="nw">1:1 Meet-up은 추후 별도 안내</span>
           </p>
         </div>
@@ -368,8 +366,7 @@ export default async function Home() {
             <div className="t">
               <b>지금 바로 참가 신청하세요</b>
               <span>
-                <span className="nw">QR 스캔 또는 버튼 클릭</span> ·{" "}
-                <span className="nw">신청 마감 {EVENT.deadline}</span>
+                QR 스캔 또는 버튼 클릭으로 신청하실 수 있습니다.
               </span>
             </div>
             <a className="btn btn-primary" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
