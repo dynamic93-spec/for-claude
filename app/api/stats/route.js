@@ -98,6 +98,8 @@ export async function GET() {
     attendees: d.attendees ?? STATS_FALLBACK.attendees,
     updatedAt: live ? new Date().toISOString() : STATS_FALLBACK.updatedAt,
     source: live ? "sheet" : "snapshot",
+    // 진단용: 각 지표를 시트에서 실제로 읽었는지 (false 면 스냅샷 값)
+    live: { dashboard: Boolean(d.total), lists: corporates !== null },
   };
 
   cache = { data: stats, at: now };
