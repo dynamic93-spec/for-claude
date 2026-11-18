@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   EVENT,
-  LEGACY,
   KEYNOTES,
   PARTICIPANTS,
   SCHEDULE,
@@ -109,10 +108,10 @@ export default function Home() {
             한자리에서 연결됩니다
           </h2>
           <p className="section-desc">
-            CORI(Connect with Our Rising Innovation)는 탭엔젤파트너스가 {LEGACY.editions}개년에 걸쳐
-            주관해 온 공공-민간 통합형 오픈이노베이션 네트워킹입니다. 공공기관은 OI 기반을
-            강화하고, 대·중견기업은 유망 스타트업을 발굴하며, 스타트업은 실질적인 협력
-            파트너를 만나는 — 협력사업 발굴과 혁신 생태계 확산의 장입니다.
+            CORI(Connect with Our Rising Innovation)는 탭엔젤파트너스가 주관하는 공공-민간
+            통합형 오픈이노베이션 네트워킹입니다. 공공기관과 대·중견기업 오픈이노베이션 담당자
+            간의 상호 교류 및 네트워킹을 통하여 협력사업 발굴과 혁신 생태계 확산의 장을
+            마련합니다.
           </p>
           <div className="about-grid">
             <div className="about-card">
@@ -268,7 +267,7 @@ export default function Home() {
           </div>
           <div>
             <Link className="btn btn-primary" href="/oi-meetup">
-              OI 밋업 신청하기 →
+              TAP 협업 미팅 신청 →
             </Link>
           </div>
         </div>
@@ -293,7 +292,7 @@ export default function Home() {
             <div className="info-card">
               <h4>HOST</h4>
               <div className="big">탭엔젤파트너스</div>
-              <p>TAP Angel Partners · {LEGACY.editions + 1}년 연속 주관</p>
+              <p>TAP Angel Partners · SINCE 2023</p>
             </div>
           </div>
 
