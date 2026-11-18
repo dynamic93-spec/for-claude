@@ -1094,3 +1094,130 @@ footer img {
     font-size: 15px;
   }
 }
+
+/* ---------- 1:1 Meet-up partners ---------- */
+.mp-group {
+  margin-top: 44px;
+}
+.mp-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.mp-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.mp-card:hover {
+  border-color: rgba(124, 92, 255, 0.55);
+  transform: translateY(-3px);
+}
+.mp-logo {
+  height: 86px;
+  padding: 16px 18px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mp-logo.is-dark {
+  background: #1d1f3a;
+}
+.mp-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.mp-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mp-name {
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.mp-tag-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--lavender-soft);
+  font-weight: 600;
+}
+.mp-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.mp-tags li {
+  font-size: 11.5px;
+  line-height: 1.3;
+  color: var(--text);
+  background: rgba(124, 92, 255, 0.16);
+  border: 1px solid rgba(124, 92, 255, 0.35);
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.mp-note {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+@media (max-width: 1080px) {
+  .mp-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .mp-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .mp-logo {
+    height: 66px;
+    padding: 12px 12px;
+  }
+  .mp-body {
+    padding: 11px 12px 13px;
+  }
+  .mp-name {
+    font-size: 14px;
+  }
+  .mp-tags li {
+    font-size: 10.5px;
+    white-space: normal;
+  }
+}
+.mp-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-bottom: 16px;
+}
+.mp-head h3 {
+  font-size: 17px;
+}
+.mp-head span {
+  font-size: 13px;
+  color: var(--lavender-soft);
+}
+/* 로고마다 시각적 크기가 비슷해 보이도록 높이 상한 */
+.mp-logo img {
+  max-height: 46px;
+  max-width: 86%;
+}
+@media (max-width: 600px) {
+  .mp-logo img {
+    max-height: 36px;
+  }
+}

@@ -3,12 +3,14 @@ import {
   EVENT,
   KEYNOTES,
   PARTICIPANTS,
+  MEETUP_PARTNERS,
   SCHEDULE,
   STATS_FALLBACK,
 } from "../lib/event-data";
 import { SIGNUP_TABS, readSignupNames } from "../lib/sheets";
 import StatsCounter from "./components/StatsCounter";
 import LogoMarquee from "./components/LogoMarquee";
+import MeetupPartners from "./components/MeetupPartners";
 
 // 페이지를 60초마다 다시 만들어 '함께하는 기업·기관' 명단을 시트와 맞춘다
 export const revalidate = 60;
@@ -66,6 +68,7 @@ export default async function Home() {
             <a href="#about">행사 소개</a>
             <a href="#stats">신청 현황</a>
             <a href="#keynote">키노트</a>
+            <a href="#meetup">1:1 밋업</a>
             <a href="#partners">참여 기업·기관</a>
             <a href="#program">프로그램</a>
             <a className="nav-cta" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
@@ -243,6 +246,21 @@ export default async function Home() {
             </div>
           </div>
           <p className="program-note">※ 발표 기관·기업 및 순서는 사정에 따라 변경될 수 있습니다.</p>
+        </div>
+      </section>
+
+      {/* 1:1 MEET-UP PARTNERS */}
+      <section id="meetup" className="stats-wrap">
+        <div className="container">
+          <div className="section-label">1:1 Business Meet-up</div>
+          <h2 className="section-title">1:1 비즈니스 밋업 참여사</h2>
+          <p className="section-desc">
+            2부 1:1 비즈니스 밋업에서 스타트업과 만나는 민간기업과 CVC·투자사{" "}
+            <span className="nw">
+              {MEETUP_PARTNERS.oi.length + MEETUP_PARTNERS.cvc.length}개사입니다.
+            </span>
+          </p>
+          <MeetupPartners partners={MEETUP_PARTNERS} />
         </div>
       </section>
 
