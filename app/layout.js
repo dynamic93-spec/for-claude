@@ -1,6 +1,14 @@
 import "./globals.css";
 
+const SHARE_IMAGE = {
+  url: "/og-image.jpg", // 메신저·SNS 공유용 1200×630 가로 이미지
+  width: 1200,
+  height: 630,
+  alt: "2026 CORI — 공공-민간 오픈이노베이션 네트워킹, 2026. 12. 3 (목) 드림플러스 강남",
+};
+
 export const metadata = {
+  metadataBase: new URL("https://cori-2026.vercel.app"),
   title: "2026 CORI | 공공&민간 연계 오픈이노베이션 네트워킹",
   description:
     "Connect with Our Rising Innovation — 탭엔젤파트너스가 주관하는 4회차 공공-민간 오픈이노베이션 네트워킹. 2026.12.3(목) 드림플러스 강남.",
@@ -8,7 +16,15 @@ export const metadata = {
     title: "2026 CORI | 공공&민간 연계 오픈이노베이션 네트워킹",
     description:
       "공공기관 · 대·중견기업 · 투자사 · 스타트업이 한자리에. 키노트, 네트워킹, 1:1 비즈니스 밋업.",
-    images: ["/keyvisual.jpg"], // 공유 미리보기는 글자가 있는 원본 키비주얼 사용
+    type: "website",
+    locale: "ko_KR",
+    url: "/",
+    siteName: "2026 CORI",
+    images: [SHARE_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [SHARE_IMAGE.url],
   },
 };
 
