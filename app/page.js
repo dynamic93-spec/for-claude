@@ -152,7 +152,7 @@ export default async function Home() {
             </Link>
           </div>
           <p className="hero-deadline">
-            <span className="nw">1:1 Meet-up은 추후 별도 안내</span>
+            <span className="nw">1:1 밋업은 참여사 매칭 결과에 따라 진행됩니다</span>
           </p>
         </div>
       </section>
