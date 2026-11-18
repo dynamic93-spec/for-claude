@@ -5,8 +5,8 @@ import Link from "next/link";
 import { MEETUP_PARTNERS } from "../../lib/event-data";
 
 const GROUPS = [
-  { key: "oi", label: "민간기업 OI" },
-  { key: "cvc", label: "CVC · 투자사" },
+  { key: "oi", label: "민간기업 OI 미팅", hint: "사업 협력(실증·공동개발 등)" },
+  { key: "cvc", label: "CVC · 투자사 미팅", hint: "투자 유치 상담" },
 ];
 const STAGES = ["투자 이력 없음", "Seed", "Pre-A", "Series A", "Series B 이상"];
 
@@ -108,8 +108,11 @@ export default function MeetupApplyPage() {
                   <span className="field-hint"> {selected.length}곳 선택</span>
                 </label>
                 {GROUPS.map((g) => (
-                  <div className="pick-group" key={g.key}>
-                    <div className="pick-title">{g.label}</div>
+                  <div className={`pick-group mp-${g.key}`} key={g.key}>
+                    <div className="pick-title">
+                      {g.label}
+                      <small>{g.hint}</small>
+                    </div>
                     <div className="pick-list">
                       {MEETUP_PARTNERS[g.key].map((p) => (
                         <button
