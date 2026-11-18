@@ -185,6 +185,12 @@ export default async function Home() {
               {KEYNOTES.public.map((k, i) => (
                 <div className="keynote-card" key={k.name}>
                   <span className="kn-no en">{String(i + 1).padStart(2, "0")}</span>
+                  <span className={`kn-logo${k.logo ? "" : " is-empty"}`} aria-hidden={!k.logo}>
+                    {k.logo && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={k.logo} alt={`${k.name} 로고`} loading="lazy" />
+                    )}
+                  </span>
                   <span className="kn-name">{k.name}</span>
                   <span className="kn-desc en">{k.time}</span>
                 </div>
@@ -195,6 +201,12 @@ export default async function Home() {
               {KEYNOTES.private.map((k, i) => (
                 <div className="keynote-card" key={k.name}>
                   <span className="kn-no en">{String(i + 1).padStart(2, "0")}</span>
+                  <span className={`kn-logo${k.logo ? "" : " is-empty"}`} aria-hidden={!k.logo}>
+                    {k.logo && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={k.logo} alt={`${k.name} 로고`} loading="lazy" />
+                    )}
+                  </span>
                   <span className="kn-name">{k.name}</span>
                   <span className="kn-desc en">{k.time}</span>
                 </div>

@@ -56,22 +56,12 @@ function doPost(e) {
 
 - 키노트·참여기관·시간표: `lib/event-data.js` (`KEYNOTES`, `PARTICIPANTS`, `SCHEDULE`)
 
-## 로고 이미지 넣기
+## 키노트 기관 로고
 
-1. **파일 준비**: 투명 배경 PNG(또는 SVG), 높이 80px 이상, 로고 주변 여백 최소화. 어두운 배경이므로 흰색/밝은 버전 로고 권장
-2. **파일명**: 영문 소문자·숫자·하이픈만 사용 (예: `cj-enm.png`, `hd-hyundai-samho.png`)
-3. **업로드**: GitHub 저장소 → `public/logos/` 폴더 → *Add file → Upload files*
-4. **매핑 등록**: `app/components/LogoMarquee.js` 의 `LOGO_FILES` 에 `"기관명": "파일명"` 추가
-   기관명은 `lib/event-data.js` 의 `PARTICIPANTS` 표기와 **완전히 같아야** 함
-
-```javascript
-const LOGO_FILES = {
-  "CJ ENM": "cj-enm.png",
-  "HD현대삼호": "hd-hyundai-samho.png",
-};
-```
-
-5. 커밋하면 Vercel이 자동 재배포 (약 1분). 매핑이 없는 기관은 기존처럼 텍스트로 표시됨
+- 파일: `public/keynote-logos/` (흰색 배지 위에 원본 컬러로 표시)
+- 연결: `lib/event-data.js` 의 `KEYNOTES` 각 항목 `logo: "/keynote-logos/파일명"`
+- `logo` 가 없으면 이름만 표시하고 로고 자리는 비워 정렬을 유지
+- 권장 파일: 투명 배경 PNG 또는 SVG, 여백 없이 잘라낸 가로형 로고
 
 ## 개발
 
