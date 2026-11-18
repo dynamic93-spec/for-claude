@@ -18,6 +18,8 @@ function Odometer({ value, active }) {
                 // 띠 높이 = 20칸 → 한 칸 = 5%
                 transform: `translateY(-${target * 5}%)`,
                 transitionDelay: `${(digits.length - 1 - i) * 120}ms`,
+                // 화면 밖에서 0으로 되돌릴 때는 애니메이션 없이 즉시 리셋
+                transition: active ? undefined : "none",
               }}
             >
               {Array.from({ length: 20 }, (_, n) => (
@@ -50,18 +52,17 @@ export default function StatsCounter({ fallback }) {
   const [pulseKey, setPulseKey] = useState(0);
   const ref = useRef(null);
 
-  // 화면에 들어오면 숫자 굴리기 시작
+  // 화면에 들어올 때마다 숫자 굴리기 재생:
+  // 40% 이상 보이면 재생, 10% 미만으로 거의 벗어나면 0으로 리셋 → 다시 들어오면 또 재생
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setActive(true);
-          io.disconnect();
-        }
+        if (entry.intersectionRatio >= 0.4) setActive(true);
+        else if (entry.intersectionRatio < 0.1) setActive(false);
       },
-      { threshold: 0.3 }
+      { threshold: [0, 0.1, 0.4] }
     );
     io.observe(el);
     return () => io.disconnect();

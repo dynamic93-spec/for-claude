@@ -8,7 +8,8 @@ const LOGO_FILES = {
 };
 
 // 모든 줄이 같은 속도로 흐르도록, 칩 1개(폭 + 간격)가 지나가는 시간을 고정
-const SECONDS_PER_ITEM = 3.2;
+// (칸이 커진 만큼 늘려서 읽기 편한 속도 유지)
+const SECONDS_PER_ITEM = 4;
 
 function Chip({ name }) {
   const file = LOGO_FILES[name];
