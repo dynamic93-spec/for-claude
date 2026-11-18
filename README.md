@@ -34,14 +34,22 @@
 ```javascript
 var OI_SHEET_ID = "1ZnGwukihba5K9gvhhe97nvxZ0tSI_XHNub1iWSiLPUk"; // 2026 CORI 운영관리_TAP
 var OI_TAB_NAME = "04. TAP OI 밋업 신청";
+var MEETUP_TAB_NAME = "05. 1:1 밋업 신청";
 
 function doPost(e) {
   var row = JSON.parse(e.postData.contents);
-  var sheet = SpreadsheetApp.openById(OI_SHEET_ID).getSheetByName(OI_TAB_NAME);
-  sheet.appendRow([
-    new Date(), row.orgType, row.orgName, row.name, row.title,
-    row.phone, row.email, row.interest, row.message,
-  ]);
+  var ss = SpreadsheetApp.openById(OI_SHEET_ID);
+  if (row.type === "meetup") {
+    ss.getSheetByName(MEETUP_TAB_NAME).appendRow([
+      new Date(), row.partners, row.company, row.name, row.title,
+      row.phone, row.email, row.field, row.stage, row.item, row.message,
+    ]);
+  } else {
+    ss.getSheetByName(OI_TAB_NAME).appendRow([
+      new Date(), row.orgType, row.orgName, row.name, row.title,
+      row.phone, row.email, row.interest, row.message,
+    ]);
+  }
   return ContentService.createTextOutput(JSON.stringify({ ok: true }))
     .setMimeType(ContentService.MimeType.JSON);
 }
@@ -51,6 +59,14 @@ function doPost(e) {
 > 프로젝트에 `doPost` 함수가 이미 있으면 이름이 겹치므로 먼저 확인하세요.
 
 3. 배포 URL을 Vercel 환경변수 `OI_MEETUP_WEBHOOK_URL` 에 설정 후 재배포
+
+## 1:1 비즈니스 밋업 참여 신청
+
+- 페이지: `/meetup-apply` (참여사 카드 클릭 시 `?partner=회사명` 으로 미리 선택)
+- API: `/api/meetup-apply` → 같은 Apps Script 웹앱에 `type: "meetup"` 으로 전달
+- 적재 위치: 운영관리 시트 `05. 1:1 밋업 신청` 탭
+- Apps Script 가 `type` 분기 버전으로 업데이트된 뒤 Vercel 환경변수 `MEETUP_APPLY_ENABLED=1` 을 켜야 접수됨
+  (켜기 전에는 "접수 시스템 연동 준비 중" 안내)
 
 ## 참여 기업·기관 명단 / 시간표
 

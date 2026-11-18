@@ -260,6 +260,15 @@ export default async function Home() {
               {MEETUP_PARTNERS.oi.length + MEETUP_PARTNERS.cvc.length}개사입니다.
             </span>
           </p>
+          <div className="mp-apply">
+            <Link className="btn btn-primary" href="/meetup-apply">
+              1:1 비즈니스 밋업 참여 신청 →
+            </Link>
+            <span>
+              참여사 카드를 눌러도 신청할 수 있습니다.{" "}
+              <span className="nw">신청 후 매칭 결과에 따라 밋업이 성사되지 않을 수 있습니다.</span>
+            </span>
+          </div>
           <MeetupPartners partners={MEETUP_PARTNERS} />
         </div>
       </section>

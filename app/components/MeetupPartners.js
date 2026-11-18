@@ -1,7 +1,15 @@
 // 2부 1:1 비즈니스 Meet-up 확정 참여사 카드 그리드
+// 카드를 누르면 해당 참여사가 미리 선택된 밋업 신청 페이지로 이동
+import Link from "next/link";
+
 function PartnerCard({ p, tags, tagLabel }) {
   return (
-    <li className="mp-card">
+    <li className="mp-item">
+      <Link
+        className="mp-card"
+        href={`/meetup-apply?partner=${encodeURIComponent(p.name)}`}
+        aria-label={`${p.name}와 1:1 밋업 신청하기`}
+      >
       <div className={`mp-logo${p.logoDark ? " is-dark" : ""}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={p.logo} alt={`${p.name} 로고`} loading="lazy" />
@@ -19,7 +27,9 @@ function PartnerCard({ p, tags, tagLabel }) {
           </>
         )}
         {p.note && <p className="mp-note">{p.note}</p>}
+        <span className="mp-cta">밋업 신청 →</span>
       </div>
+      </Link>
     </li>
   );
 }
