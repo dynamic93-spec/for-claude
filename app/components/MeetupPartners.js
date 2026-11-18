@@ -45,9 +45,13 @@ export default function MeetupPartners({ partners }) {
           <span>{partners.cvc.length}개사 · 희망 투자 단계</span>
         </div>
         <ul className="mp-grid">
-          {partners.cvc.map((p) => (
-            <PartnerCard key={p.name} p={p} tags={p.stages || []} tagLabel="투자 단계" />
-          ))}
+          {partners.cvc.map((p) =>
+            p.stages?.length || !p.fields?.length ? (
+              <PartnerCard key={p.name} p={p} tags={p.stages || []} tagLabel="투자 단계" />
+            ) : (
+              <PartnerCard key={p.name} p={p} tags={p.fields} tagLabel="관심 분야" />
+            )
+          )}
         </ul>
       </div>
     </>
