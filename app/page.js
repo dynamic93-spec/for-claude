@@ -144,9 +144,6 @@ export default async function Home() {
             <a className="btn btn-primary" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
               참가 신청하기 →
             </a>
-            <Link className="btn btn-primary" href="/meetup-apply">
-              1:1 비즈니스 밋업 신청
-            </Link>
             <Link className="btn btn-primary" href="/oi-meetup">
               TAP 협업 미팅 신청
             </Link>
