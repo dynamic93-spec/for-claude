@@ -90,7 +90,7 @@ export default function Home() {
             <a className="btn btn-primary" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
               참가 신청하기 →
             </a>
-            <Link className="btn btn-ghost" href="/oi-meetup">
+            <Link className="btn btn-primary" href="/oi-meetup">
               TAP 협업 미팅 신청
             </Link>
           </div>
