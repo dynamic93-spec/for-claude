@@ -6,8 +6,27 @@ import {
   SCHEDULE,
   STATS_FALLBACK,
 } from "../lib/event-data";
+import { SIGNUP_TABS, readSignupNames } from "../lib/sheets";
 import StatsCounter from "./components/StatsCounter";
 import LogoMarquee from "./components/LogoMarquee";
+
+// 페이지를 60초마다 다시 만들어 '함께하는 기업·기관' 명단을 시트와 맞춘다
+export const revalidate = 60;
+
+// 접수 탭의 신청 기관명을 불러오고, 실패하거나 비어 있으면 event-data.js 의 명단을 쓴다
+async function loadParticipants() {
+  const groups = Object.keys(SIGNUP_TABS);
+  const results = await Promise.allSettled(
+    groups.map((g) => readSignupNames(SIGNUP_TABS[g], { next: { revalidate } }))
+  );
+  return Object.fromEntries(
+    groups.map((g, i) => {
+      const r = results[i];
+      const names = r.status === "fulfilled" && r.value.length ? r.value : PARTICIPANTS[g];
+      return [g, names];
+    })
+  );
+}
 
 function NetworkLines() {
   return (
@@ -35,7 +54,8 @@ function NetworkLines() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const participants = await loadParticipants();
   return (
     <>
       <header className="site-header">
@@ -196,25 +216,25 @@ export default function Home() {
           <div className="marquee-group">
             <div className="mq-label">
               <h3>공공기관</h3>
-              <span>{PARTICIPANTS.public.length}개 기관</span>
+              <span>{participants.public.length}개 기관</span>
             </div>
-            <LogoMarquee items={PARTICIPANTS.public} />
+            <LogoMarquee items={participants.public} />
           </div>
 
           <div className="marquee-group">
             <div className="mq-label">
               <h3>대·중견기업</h3>
-              <span>{PARTICIPANTS.private.length}개사 · 1:1 밋업 OI 파트너</span>
+              <span>{participants.private.length}개사 · 1:1 밋업 OI 파트너</span>
             </div>
-            <LogoMarquee items={PARTICIPANTS.private} reverse />
+            <LogoMarquee items={participants.private} reverse />
           </div>
 
           <div className="marquee-group">
             <div className="mq-label">
               <h3>투자사 · CVC</h3>
-              <span>{PARTICIPANTS.investors.length}개사</span>
+              <span>{participants.investors.length}개사</span>
             </div>
-            <LogoMarquee items={PARTICIPANTS.investors} />
+            <LogoMarquee items={participants.investors} />
           </div>
         </div>
       </section>
