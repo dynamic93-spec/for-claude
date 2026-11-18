@@ -44,10 +44,10 @@ export default function OiMeetupPage() {
           <Link href="/" className="back-link">
             ← 2026 CORI 메인으로
           </Link>
-          <h1>TAP 오픈이노베이션 밋업 신청</h1>
+          <h1>TAP 협업 미팅 신청</h1>
           <p className="sub">
             탭엔젤파트너스와 오픈이노베이션 협업을 희망하는 <b>대·중견기업</b> 및{" "}
-            <b>공공기관</b>을 위한 별도 밋업 신청 페이지입니다. 신청 내용 검토 후
+            <b>공공기관</b>을 위한 별도 협업 미팅 신청 페이지입니다. 신청 내용 검토 후
             담당자가 개별 연락드립니다.
           </p>
 
@@ -109,7 +109,7 @@ export default function OiMeetupPage() {
             </div>
 
             <button className="form-submit" type="submit" disabled={status === "sending"}>
-              {status === "sending" ? "접수 중..." : "밋업 신청하기"}
+              {status === "sending" ? "접수 중..." : "협업 미팅 신청하기"}
             </button>
           </form>
 
