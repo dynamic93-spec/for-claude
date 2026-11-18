@@ -17,15 +17,16 @@ function PartnerCard({ p, tags, tagLabel, cta }) {
         </div>
         <div className="mp-body">
           <h4 className="mp-name">{p.name}</h4>
-          {tags.length > 0 && (
-            <>
-              <span className="mp-tag-label">{tagLabel}</span>
-              <ul className="mp-tags">
-                {tags.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
-            </>
+          <span className="mp-tag-label">{tagLabel}</span>
+          {tags.length > 0 ? (
+            <ul className="mp-tags">
+              {tags.map((t) => (
+                <li key={t}>{t}</li>
+              ))}
+            </ul>
+          ) : (
+            // 정보 미확보 기업: 신청서 원본에 응답이 들어오면 1분 안에 자동으로 교체됨
+            <span className="mp-tbd">공개 예정</span>
           )}
           {p.note && <p className="mp-note">{p.note}</p>}
           <span className="mp-cta">{cta} 신청 →</span>

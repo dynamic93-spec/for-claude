@@ -7,7 +7,7 @@ import {
   SCHEDULE,
   STATS_FALLBACK,
 } from "../lib/event-data";
-import { SIGNUP_TABS, readSignupNames } from "../lib/sheets";
+import { SIGNUP_TABS, matchKey, readSignupDetails, readSignupNames } from "../lib/sheets";
 import StatsCounter from "./components/StatsCounter";
 import LogoMarquee from "./components/LogoMarquee";
 import MeetupPartners from "./components/MeetupPartners";
@@ -56,8 +56,34 @@ function NetworkLines() {
   );
 }
 
+// 1:1 밋업 참여사 카드에 신청서 원본의 관심 분야·투자 단계를 덮어써 자동 갱신
+async function loadMeetupPartners() {
+  let details;
+  try {
+    details = await readSignupDetails({ next: { revalidate } });
+  } catch {
+    return MEETUP_PARTNERS;
+  }
+  const merge = (p) => {
+    const hit = [p.name, ...(p.aliases || [])]
+      .map((n) => details.get(matchKey(n)))
+      .find(Boolean);
+    if (!hit) return p;
+    return {
+      ...p,
+      fields: hit.fields.length ? hit.fields : p.fields || [],
+      stages: hit.stages.length ? hit.stages : p.stages || [],
+      note: p.note || hit.note || undefined,
+    };
+  };
+  return { oi: MEETUP_PARTNERS.oi.map(merge), cvc: MEETUP_PARTNERS.cvc.map(merge) };
+}
+
 export default async function Home() {
-  const participants = await loadParticipants();
+  const [participants, meetupPartners] = await Promise.all([
+    loadParticipants(),
+    loadMeetupPartners(),
+  ]);
   return (
     <>
       <header className="site-header">
@@ -269,7 +295,7 @@ export default async function Home() {
               <span className="nw">신청 후 매칭 결과에 따라 밋업이 성사되지 않을 수 있습니다.</span>
             </span>
           </div>
-          <MeetupPartners partners={MEETUP_PARTNERS} />
+          <MeetupPartners partners={meetupPartners} />
         </div>
       </section>
 
