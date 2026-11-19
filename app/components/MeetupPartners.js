@@ -30,9 +30,19 @@ function PartnerCard({ p, tags, tagLabel, cta }) {
           )}
           {p.collabs?.length > 0 && (
             <>
-              <span className="mp-tag-label mp-collab-label">협업 형태</span>
-              <ul className="mp-tags mp-collabs">
+              <span className="mp-tag-label mp-sub-label">협업 형태</span>
+              <ul className="mp-tags mp-sub-tags mp-collabs">
                 {p.collabs.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </>
+          )}
+          {p.focus?.length > 0 && (
+            <>
+              <span className="mp-tag-label mp-sub-label">주력 투자 분야</span>
+              <ul className="mp-tags mp-sub-tags">
+                {p.focus.map((t) => (
                   <li key={t}>{t}</li>
                 ))}
               </ul>
@@ -92,7 +102,7 @@ export default function MeetupPartners({ partners }) {
           title="CVC · 투자사 미팅"
           desc="CVC·투자사와 투자 유치를 상담하는 미팅"
           count={partners.cvc.length}
-          info="카드에 희망 투자 단계 표시"
+          info="카드에 투자 단계·주력 투자 분야 표시"
         />
         <ul className="mp-grid">
           {partners.cvc.map((p) =>

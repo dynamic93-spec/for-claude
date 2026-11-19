@@ -1637,10 +1637,10 @@ a.mp-card:focus-visible {
 }
 
 /* 1:1 밋업 카드: 검토 가능 협업 형태 (관심 분야와 구분되는 테두리형 칩) */
-.mp-collab-label {
+.mp-sub-label {
   margin-top: 10px;
 }
-.mp-tags.mp-collabs li {
+.mp-tags.mp-sub-tags li {
   background: transparent;
   border: 1px dashed rgba(199, 184, 245, 0.45);
   color: var(--text-dim);
