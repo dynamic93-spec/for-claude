@@ -3,7 +3,7 @@
 // 민간기업 OI(보라) / CVC·투자사(청록)는 색·칸으로 구분
 import Link from "next/link";
 
-function PartnerCard({ p, tags, tagLabel, cta }) {
+function PartnerCard({ p, tags, tagLabel, cta, subFields = false }) {
   return (
     <li className="mp-item">
       <Link
@@ -27,6 +27,16 @@ function PartnerCard({ p, tags, tagLabel, cta }) {
           ) : (
             // 정보 미확보 기업: 신청서 원본에 응답이 들어오면 1분 안에 자동으로 교체됨
             <span className="mp-tbd">공개 예정</span>
+          )}
+          {subFields && p.fields?.length > 0 && (
+            <>
+              <span className="mp-tag-label mp-sub-label">관심 분야</span>
+              <ul className="mp-tags mp-sub-tags">
+                {p.fields.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </>
           )}
           {p.collabs?.length > 0 && (
             <>
@@ -105,19 +115,16 @@ export default function MeetupPartners({ partners }) {
           info="카드에 투자 단계·주력 투자 분야 표시"
         />
         <ul className="mp-grid">
-          {partners.cvc.map((p) =>
-            p.stages?.length || !p.fields?.length ? (
-              <PartnerCard
-                key={p.name}
-                p={p}
-                tags={p.stages || []}
-                tagLabel="투자 단계"
-                cta="투자 미팅"
-              />
-            ) : (
-              <PartnerCard key={p.name} p={p} tags={p.fields} tagLabel="관심 분야" cta="투자 미팅" />
-            )
-          )}
+          {partners.cvc.map((p) => (
+            <PartnerCard
+              key={p.name}
+              p={p}
+              tags={p.stages || []}
+              tagLabel="투자 단계"
+              cta="투자 미팅"
+              subFields
+            />
+          ))}
         </ul>
       </div>
     </>
