@@ -14,6 +14,20 @@ export default function MeetupApplyPage() {
   const [selected, setSelected] = useState([]);
   const [status, setStatus] = useState(null); // null | "sending" | "ok" | "err"
   const [errMsg, setErrMsg] = useState("");
+  // 기업명 자격 확인: null | "checking" | "ok" | "no" | "error"
+  const [elig, setElig] = useState(null);
+
+  async function checkCompany(name) {
+    if (name.trim().length < 2) return setElig(null);
+    setElig("checking");
+    try {
+      const res = await fetch(`/api/startup-check?name=${encodeURIComponent(name.trim())}`);
+      const json = await res.json();
+      setElig(json.ok ? (json.eligible ? "ok" : "no") : "error");
+    } catch {
+      setElig("error");
+    }
+  }
 
   // 카드에서 넘어온 참여사를 미리 선택 (?partner=회사명)
   useEffect(() => {
@@ -27,6 +41,11 @@ export default function MeetupApplyPage() {
 
   async function onSubmit(e) {
     e.preventDefault();
+    if (elig === "no") {
+      setStatus("err");
+      setErrMsg("TAP 지원사업 참여기업 명단에서 확인되지 않는 기업명입니다. 기업명을 다시 확인해 주세요.");
+      return;
+    }
     if (!selected.length) {
       setStatus("err");
       setErrMsg("밋업을 희망하는 참여사를 1곳 이상 선택해 주세요.");
@@ -51,7 +70,9 @@ export default function MeetupApplyPage() {
       } else {
         setStatus("err");
         setErrMsg(
-          json.error === "not_ready"
+          json.error === "not_eligible"
+            ? "TAP 지원사업 참여기업만 신청할 수 있습니다. 기업명을 다시 확인하시거나 담당자에게 문의해 주세요."
+            : json.error === "not_ready"
             ? "접수 시스템 연동 준비 중입니다. 잠시 후 다시 시도하시거나 담당자에게 문의해 주세요."
             : "접수 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
         );
@@ -78,6 +99,9 @@ export default function MeetupApplyPage() {
           <div className="notice-box" role="note">
             <b>신청 전 꼭 확인해 주세요</b>
             <ul>
+              <li>
+                <strong>탭엔젤파트너스 지원사업에 참여 중인 스타트업만</strong> 신청할 수 있습니다.
+              </li>
               <li>
                 1:1 밋업은 <strong>참여사의 검토와 매칭 결과에 따라</strong> 진행됩니다.
               </li>
@@ -133,8 +157,26 @@ export default function MeetupApplyPage() {
               <div className="field">
                 <label>
                   기업명 <span className="req">*</span>
+                  <span className="field-hint"> TAP 지원사업 참여기업만 신청 가능</span>
                 </label>
-                <input name="company" required placeholder="예) 주식회사 OOO" />
+                <input
+                  name="company"
+                  required
+                  placeholder="지원사업에 등록된 기업명을 입력해 주세요"
+                  onChange={() => elig && setElig(null)}
+                  onBlur={(e) => checkCompany(e.target.value)}
+                />
+                {elig === "checking" && <p className="elig-msg">참여기업 명단을 확인하고 있습니다…</p>}
+                {elig === "ok" && <p className="elig-msg ok">✓ 지원사업 참여기업으로 확인되었습니다.</p>}
+                {elig === "no" && (
+                  <p className="elig-msg no">
+                    지원사업 참여기업 명단에서 확인되지 않습니다. 사업 신청 시 등록한 기업명으로
+                    입력해 주시고, 계속 확인되지 않으면 담당자에게 문의해 주세요.
+                  </p>
+                )}
+                {elig === "error" && (
+                  <p className="elig-msg">명단 확인이 지연되고 있습니다. 제출 시 다시 확인합니다.</p>
+                )}
               </div>
               <div className="field-row">
                 <div className="field">

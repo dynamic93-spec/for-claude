@@ -140,13 +140,26 @@ export default async function Home() {
               </b>
             </span>
           </div>
+          {/* 버튼마다 '누가 신청하는 창구인지' 한 줄로 표시 */}
           <div className="hero-actions">
-            <a className="btn btn-primary" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
-              참가 신청하기 →
-            </a>
-            <Link className="btn btn-primary" href="/oi-meetup">
-              TAP 협업 미팅 신청
-            </Link>
+            <div className="cta-item">
+              <a className="btn btn-primary" href={EVENT.applyUrl} target="_blank" rel="noreferrer">
+                참가 신청하기 →
+              </a>
+              <span className="cta-for">
+                <b>전체 참관객</b>
+                <span className="nw">공공기관 · 대·중견기업 · 투자사 · 스타트업</span>
+              </span>
+            </div>
+            <div className="cta-item">
+              <Link className="btn btn-primary" href="/oi-meetup">
+                TAP 협업 미팅 신청
+              </Link>
+              <span className="cta-for">
+                <b>공공기관 · 대·중견기업 전용</b>
+                <span className="nw">탭엔젤파트너스와 별도 미팅 희망 시</span>
+              </span>
+            </div>
           </div>
           <p className="hero-deadline">
             <span className="nw">1:1 밋업은 참여사 매칭 결과에 따라 진행됩니다</span>
@@ -291,8 +304,8 @@ export default async function Home() {
               1:1 비즈니스 밋업 참여 신청 →
             </Link>
             <span>
-              참여사 카드를 눌러도 신청할 수 있습니다.{" "}
-              신청 후 매칭 결과에 따라 밋업이 성사되지 않을 수 있습니다.
+              <b className="mp-apply-who">TAP 지원사업 참여 스타트업 대상</b> · 참여사 카드를 눌러도
+              신청할 수 있습니다. 신청 후 매칭 결과에 따라 밋업이 성사되지 않을 수 있습니다.
             </span>
           </div>
           <MeetupPartners partners={meetupPartners} />

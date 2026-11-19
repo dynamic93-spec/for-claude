@@ -4,6 +4,7 @@
 // Apps Script 를 type 분기 버전으로 업데이트한 뒤 MEETUP_APPLY_ENABLED=1 로 켠다
 // (구버전 스크립트에 보내면 OI 탭에 잘못된 행이 쌓이므로).
 import { MEETUP_PARTNERS } from "../../../lib/event-data";
+import { isEligibleStartup } from "../../../lib/sheets";
 
 export const dynamic = "force-dynamic";
 
@@ -34,6 +35,15 @@ export async function POST(req) {
   }
   if (body.agree !== true) {
     return Response.json({ ok: false, error: "missing field: agree" }, { status: 400 });
+  }
+
+  // TAP 지원사업 참여 스타트업만 신청 가능 (초청명단 '04. 초청명단(스타트업)' B열 사업명 기재 기업)
+  try {
+    if (!(await isEligibleStartup(clip(body.company, 100)))) {
+      return Response.json({ ok: false, error: "not_eligible" }, { status: 403 });
+    }
+  } catch {
+    return Response.json({ ok: false, error: "list_unavailable" }, { status: 503 });
   }
 
   const webhook = process.env.OI_MEETUP_WEBHOOK_URL;

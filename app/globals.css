@@ -1527,3 +1527,51 @@ a.mp-card:focus-visible {
     overflow-wrap: anywhere;
   }
 }
+
+/* ---------- Hero CTAs: 대상 구분 ---------- */
+.hero-actions {
+  align-items: flex-start;
+  gap: 18px 22px;
+}
+.cta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cta-for {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-dim);
+}
+.cta-for b {
+  font-size: 13.5px;
+  color: #fff;
+  font-weight: 700;
+}
+@media (max-width: 600px) {
+  .hero-actions {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+/* 1:1 밋업 신청: 기업명 자격 확인 메시지 */
+.elig-msg {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+.elig-msg.ok {
+  color: #8ef0c5;
+}
+.elig-msg.no {
+  color: #ffa9bf;
+}
+.mp-apply-who {
+  color: #fff;
+}
