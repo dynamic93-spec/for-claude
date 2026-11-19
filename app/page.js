@@ -56,7 +56,7 @@ function NetworkLines() {
   );
 }
 
-// 1:1 밋업 참여사 카드에 신청서 원본의 관심 분야·투자 단계를 덮어써 자동 갱신
+// 1:1 밋업 참여사 카드에 신청서 원본의 관심 분야·협업 형태·투자 단계를 덮어써 자동 갱신
 async function loadMeetupPartners() {
   let details;
   try {
@@ -73,6 +73,7 @@ async function loadMeetupPartners() {
       ...p,
       fields: hit.fields.length ? hit.fields : p.fields || [],
       stages: hit.stages.length ? hit.stages : p.stages || [],
+      collabs: hit.collabs.length ? hit.collabs : p.collabs || [],
       note: p.note || hit.note || undefined,
     };
   };

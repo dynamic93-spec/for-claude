@@ -28,6 +28,16 @@ function PartnerCard({ p, tags, tagLabel, cta }) {
             // 정보 미확보 기업: 신청서 원본에 응답이 들어오면 1분 안에 자동으로 교체됨
             <span className="mp-tbd">공개 예정</span>
           )}
+          {p.collabs?.length > 0 && (
+            <>
+              <span className="mp-tag-label mp-collab-label">협업 형태</span>
+              <ul className="mp-tags mp-collabs">
+                {p.collabs.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </>
+          )}
           {p.note && <p className="mp-note">{p.note}</p>}
           <span className="mp-cta">{cta} 신청 →</span>
         </div>
@@ -61,7 +71,7 @@ export default function MeetupPartners({ partners }) {
           title="민간기업 OI 미팅"
           desc="대·중견기업과 실증·공동개발 등 사업 협력을 논의하는 미팅"
           count={partners.oi.length}
-          info="카드에 관심 스타트업 분야 표시"
+          info="카드에 관심 분야·협업 형태 표시"
         />
         <ul className="mp-grid">
           {partners.oi.map((p) => (
