@@ -1528,34 +1528,48 @@ a.mp-card:focus-visible {
   }
 }
 
-/* ---------- Hero CTAs: 대상 구분 ---------- */
+/* ---------- Hero CTAs: 대상별 칸 구분 (같은 크기) ---------- */
 .hero-actions {
-  align-items: flex-start;
-  gap: 18px 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 290px));
+  align-items: stretch;
+  gap: 20px;
 }
 .cta-item {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(199, 184, 245, 0.22);
+  border-radius: 18px;
+  background: rgba(20, 12, 48, 0.45);
+  backdrop-filter: blur(6px);
+}
+.cta-item .btn {
+  width: 100%;
+  justify-content: center;
+  padding: 15px 16px;
+  white-space: nowrap;
 }
 .cta-for {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding-left: 4px;
+  gap: 3px;
+  padding: 0 2px;
   font-size: 13px;
   line-height: 1.45;
   color: var(--text-dim);
+  text-align: center;
 }
 .cta-for b {
   font-size: 13.5px;
   color: #fff;
   font-weight: 700;
 }
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .hero-actions {
-    flex-direction: column;
-    gap: 16px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
   }
 }
 
