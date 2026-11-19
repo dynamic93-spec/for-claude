@@ -306,8 +306,8 @@ export default async function Home() {
                 <span className="nw">TAP 지원사업 참여</span> <span className="nw">스타트업 전용</span>
               </strong>
               <p>
-                탭엔젤파트너스 지원사업에 참여 중인 스타트업만 신청할 수 있으며,{" "}
-                <span className="nw">신청 시 참여기업 명단으로 확인합니다.</span>
+                탭엔젤파트너스 지원사업에 참여 중인{" "}
+                <span className="nw">스타트업만 신청할 수 있습니다.</span>
               </p>
             </div>
           </div>
